@@ -1,0 +1,19 @@
+- hosts: "{{ hosts }}"
+
+  become: yes
+  tasks:
+
+  - name: install core packages
+    apt:
+      name:
+        - qemu-guest-agent
+ #      - prometheus-node-exporter
+ #      - nfs-common
+ #      - unzip
+      update_cache: yes
+
+  - name: start guest qemu-guest-agent
+    service:
+      name: qemu-guest-agent
+      state: started
+      enabled: yes
